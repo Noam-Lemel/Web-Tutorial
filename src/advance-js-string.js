@@ -116,4 +116,28 @@ console.log(mySlice("my name is noam",3,7));
 console.log("my name is noam".slice(3,7));
 
 //drill 05
+//regular selution
+const myCounter=(str,strSearched)=>{
+    let result=0;
+    for(let i=0;i<str.length;i++){
+        let found=true;
+        for(let j=0;j<strSearched.length;j++){
+            if(str[i+j]!==strSearched[j]){
+                found=false;
+                break;
+            }
+        }
+        if(found) result++;
+    }
+    return result;
+}
+console.log(myCounter('my name is noam','m'));
+
+//Recorsive Solution
+const myCounterRecorsive=(str,strSearched)=>{
+    if(str.length<strSearched.length) return 0;
+    if(str.slice(0,strSearched.length)===strSearched) return 1+myCounterRecorsive(str.slice(1),strSearched);
+    else return  0+myCounterRecorsive(str.slice(1),strSearched);
+}
+console.log(myCounterRecorsive("banana", "ana"));
 

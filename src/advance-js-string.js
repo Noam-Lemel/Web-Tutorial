@@ -229,3 +229,47 @@ const mySumDigits=(num)=>{
     return lastNumber+mySumDigits(num);
 }
 console.log(mySumDigits(126));
+
+//drill 07
+//regular selution
+const mySplit=(str,separator)=>{
+    let result=[];
+    if(separator==null){
+        result.push(str);
+        return result;
+    }
+    if(separator===''){
+        for(let i=0;i<str.length;i++)
+            result.push(str[i]);
+        return result;
+    }
+    let currentIndex=0;
+    let lastIndex=0;
+    while(currentIndex!==-1){
+        currentIndex=str.indexOf(separator,lastIndex);
+        if(currentIndex===-1){
+            result.push(str.slice(lastIndex));
+            break;
+        }
+        result.push(str.slice(lastIndex,currentIndex));
+        lastIndex=currentIndex+separator.length;
+        }
+    return result;
+}
+console.log(mySplit("my name is noam"," "));
+
+//Recorsive Solution
+const mySplitRec=(str,separator)=>{
+     if(separator==null){
+       return [str];
+    }
+    if(separator===''){
+        if(str==='') return[];
+        return [str[0]].concat(mySplitRec(str.slice(1),separator));
+    }
+    let separatorIndex=str.indexOf(separator);
+    if(separatorIndex===-1) 
+        return [str];
+    return [str.slice(0,separatorIndex)].concat(mySplitRec(str.slice(separatorIndex+separator.length),separator));
+}
+console.log(mySplitRec("my name is noam"," "));

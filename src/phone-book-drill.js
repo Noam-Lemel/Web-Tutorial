@@ -37,9 +37,17 @@ const updateSearchResult=()=>{
  searchResult.innerHTML="";
     let list=[...phoneBookList];
     let input=searchInput.value.toLowerCase();
-    let searchList=list.filter((el)=>el[0].includes(input)).sort();
-    if(!isInOrder)
-        searchList.reverse();
+    let searchList=list.filter((el)=>el[0].includes(input)).sort(([a],[b])=>{
+        if(isInOrder){
+            if(a>b) return 1;
+            if(a<b) return -1;
+            return 0;
+        }else{
+             if(a>b) return -1;
+            if(a<b) return 1;
+            return 0;
+        }
+    });
     for(let i=0;i<searchList.length;i++){
         let newSpot=document.createElement('div');
         let name=searchList[i][0];

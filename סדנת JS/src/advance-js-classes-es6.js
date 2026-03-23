@@ -37,22 +37,25 @@ console.log(chen.toString());
 //drill 01
 class Polygon{
     constructor(name,...rest){
-         this.sideNum=rest.length>2?rest.length:null;
-        if(this.sideNum!==null){
         this.name=name;
-        this.side=[...rest];}
-        else{
+        this.sideNum=rest.length;
+        this.sides=[...rest];
+
+        let totalLength=this.circumference;
+        for(let side of rest){
+            if(side>totalLength-side||side<=0){
             this.name='Impossible Shape';
-            this.side=null;
+            this.sideNum=null;
+            this.sides=null;
+            break;
+            }
         }
     }
     get circumference(){
         if(this.name==='Impossible Shape') return null;
-        let result=0;
-        for(let i=0;i<this.sideNum;i++){
-            result+=this.side[i];
-        }
-        return result;
+        return this.sides.reduce((acc,cor)=>{
+            return acc+cor;
+        },0);
     }
     get area(){
         return null;
@@ -75,7 +78,7 @@ class Rectangle extends Polygon{
     }
      toString(){
          if(this.name==='Impossible Shape')
-            return super.toString();
+            return "Not a Rectangle";
         else
             return super.toString()+` and have length of ${this.length}, and width of ${this.width}`;
     }
@@ -87,14 +90,14 @@ class Square extends Rectangle{
     }
     toString(){
          if(this.name==='Impossible Shape')
-            return super.toString();
+          return "Not a Square";
         else
             return `the Square have length of ${this.length}`;
     }
 }
 let square=new Square(4);
-console.log(square.circumference);
+console.log(square.toString());
 let rectangle=new Rectangle(2,6);
-console.log(rectangle.circumference);
-let polygon=new Polygon("trapezoid",4,4);
-console.log(polygon.toString());
+console.log(rectangle.toString());
+let polygon=new Polygon("bad",10,1,1);
+console.log(polygon.toString());    

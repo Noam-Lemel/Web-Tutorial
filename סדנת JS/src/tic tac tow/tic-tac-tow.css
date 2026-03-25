@@ -2,13 +2,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    /* border: 5px solid black; */
+    background: #cccc;
+    gap: 1vh;
     margin: 10%;
 }
 .square{
     min-height: 80px;
     min-width: 20px;
-    outline: 2px solid black;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +20,23 @@
     background: 
         linear-gradient(45deg, transparent 47%, black 47%, black 53%, transparent 53%),
         linear-gradient(-45deg, transparent 47%, black 47%, black 53%, transparent 53%);
+    /* display: flex;
+    align-items: center;
+    position: relative; */
 }
+/* .X_part1{
+    background: black;
+    height: 1vh;
+    width: 100%;
+    transform: rotate(45deg);
+}
+.X_part2{
+      background: black;
+    height: 1vh;
+    width: 100%;
+    transform: rotate(-45deg);
+    position: absolute;
+} */
 .O{
     border: 2px solid black;
     border-radius: 50%;

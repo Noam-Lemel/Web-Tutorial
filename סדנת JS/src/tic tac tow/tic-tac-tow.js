@@ -1,27 +1,37 @@
-import * as utils from "./tic-tac-tow-logic-module.js";
-const board=document.getElementById("board-container");
-const restartButton=document.getElementById('restart-button');
+let boardData=['-','-','-','-','-','-','-','-','-'];
+let isXturn=true;
 
-const startGame=()=>{
-    board.innerHTML='';
-    utils.resetData();
-    for(let i=0;i<9;i++){
-    let square=document.createElement('div');
-    square.id=i;
-    square.innerHTML=' ';
-    square.classList.add('square');
-    square.addEventListener('click',()=>{
-        let squareId=parseInt(square.id);
-        if(utils.isValidMove(squareId)){
-            utils.updateBoardData(squareId);
-            let move=document.createElement('div');
-            move.classList.add(utils.getisXturn()?"X":"O");
-            square.appendChild(move);
-            utils.updateTurn();
-        }
-        else return;
-    });
-    board.appendChild(square);
+export const resetData=()=>{
+    boardData=['-','-','-','-','-','-','-','-','-'];
+    isXturn=true;
 }
+export const updateBoardData=(dataIndex)=>{
+    boardData[dataIndex]=isXturn?'X':'O';
 }
-restartButton.addEventListener('click',startGame);
+export const getisXturn=()=>{
+    return isXturn;
+}
+export const updateTurn=()=>{
+    isXturn=!isXturn;
+}
+export const isValidMove=(squareId)=>{
+    if(boardData[squareId]==='-')
+        return true;
+    return false;
+}
+export const isVictory=()=>{
+    const victoryRow=[
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]];
+    for(let [a,b,c] of victoryRow){
+        if(boardData[a]==='-') continue;
+        if(boardData[a]!==boardData[b]) continue;
+        if(boardData[b]===boardData[c]) return true;
+    }
+    return false;
+}
+export const isDraw=()=>{
+    if(!boardData.includes('-')) return true;
+    return false;
+}

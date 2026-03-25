@@ -4,7 +4,7 @@
 // console.log(sum(3,4));
 // console.log(multi(5,6));
 
-import * as utils from "./advance-js-module-export.js";
+import * as utils from "./04-module-export.js";
 // import _ from 'lodash';
 
 console.log(utils.sum(3,4));
@@ -23,4 +23,4 @@ let arr1=[{name:'moshe',id:"o85u23489"},
 console.log(utils.getSpecialNumber());
 
 //exemple 4
-import './advance-js-module-run.js';
+import './04-module-run.js';

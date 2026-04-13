@@ -1,3 +1,5 @@
+const { reject, forEach } = require("lodash");
+
 //exemple
 const asyncPromise=new Promise((resolve,reject)=>{
     setTimeout(()=>{
@@ -82,3 +84,119 @@ asyncdivide(2,-10)
     .catch((err)=>{
         console.log('error:',err);
     })
+
+// race
+const p1=new Promise((resolve,reject)=>{
+    setTimeout(()=>{reject('p1 error')},500);
+})
+const p2=new Promise((resolve,reject)=>{
+    setTimeout(()=>{reject('p2 error')},1000);
+})
+const p3=new Promise((resolve,reject)=>{
+    setTimeout(()=>{reject('p3 error')},1500);
+})
+// Promise.race([p1,p2,p3])
+//     .then((res)=>{
+//         console.log("race res : ",res);
+//     })
+//     .catch((err)=>{
+//         console.log("race err : ",err);
+//     })
+
+//drill 03 - myRace
+const myPromiseRace=(promises)=>{
+    return new Promise((resolve,reject)=>{
+        for(let promise of promises){
+            promise
+                .then((res)=>{return resolve(res);})
+                .catch((err)=>{return reject(err);})
+        }})
+}
+myPromiseRace([p1,p2,p3])
+    .then((res)=>{
+        console.log("myPromiseRace res : ",res);
+    })
+    .catch((err)=>{
+        console.log("myPromiseRace err : ",err);
+    });
+
+//all
+// Promise.all([p1,p2,p3])
+//     .then((res)=>{console.log('all data: ',res)})
+//     .catch((err)=>{console.log('all error: ',err)});
+
+//drill 04 - myAll
+const myPromiseAll=(promises)=>{
+    return new Promise((resolve,reject)=>{
+        let result=[];
+        let counter=0;
+        for(let i=0;i<promises.length;i++){
+            promises[i]
+                .then((res)=>{
+                    result[i]=res;
+                    counter++;
+                    if(counter===promises.length)
+                        return resolve(result);
+                })
+                .catch((err)=>{
+                    return reject(err);
+                })
+        }
+    })
+}
+myPromiseAll([p1,p2,p3])
+    .then((res)=>{console.log('all data: ',res)})
+    .catch((err)=>{console.log('all error: ',err)});
+
+//drill 05 - allSettled
+const myPromiseAllSettled=(promises)=>{
+    return new Promise((resolve)=>{
+        let result=[];
+        let counter=0;
+        const resolveResult=()=>{
+             counter++;
+            if(counter===promises.length)
+                resolve(result);
+        }
+        for(let i=0;i<promises.length;i++){
+            promises[i]
+                .then((res)=>{
+                  result[i]={
+                    status:'fulfilled',
+                    value:res
+                  }; 
+                  resolveResult();
+                })
+                .catch((err)=>{
+                    result[i]={
+                    status:'rejected',
+                    reason:err
+                  }; 
+                  resolveResult();
+                })
+        }
+    })
+}
+myPromiseAllSettled([p1,p2,p3])
+    .then((res)=>{
+        console.log('myPromiseAllSettled res: ',res);
+    });
+
+//drill 06- any
+const myPromiseAny=(promises)=>{
+    return new Promise((resolve,reject)=>{
+        let result=[];
+        let counter=0;
+        for(let i=0;i<promises.length;i++){
+            promises[i]
+                .then((res)=>{return resolve(res);})
+                .catch((err)=>{
+                    result[i]=err;
+                    counter++;
+                    if(counter===promises.length)
+                        return reject(result);
+                })}
+    })}
+myPromiseAny([p1,p2,p3])
+    .then((res)=>{console.log('myPromiseAny res: ', res)})
+    .catch((err)=>{console.log('myPromiseAny err: ',err)});

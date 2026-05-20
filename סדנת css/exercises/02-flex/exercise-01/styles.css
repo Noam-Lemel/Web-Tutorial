@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-color: lightblue;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+    height: 200px;
+    width:200px;
+
+    background-color: lightcoral;
+    border: 2px solid red;
+
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+}

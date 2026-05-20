@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+html{
+    font-size: 16px;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.title{
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+}
+.info-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.25rem;
+}
+.info{
+    width: 200px;
+    flex-direction: column;
+    text-align:center;
+}

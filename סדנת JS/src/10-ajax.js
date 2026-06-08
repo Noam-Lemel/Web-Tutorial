@@ -1,15 +1,15 @@
 //GET
-fetch("https://api.chucknorris.io/jokes/ux5mdkg3ssujpmgao3uzvg")
-    .then((res)=>{
-        if(res.ok)
-            return res.json();
-        else
-            throw new Error(res.status);
-    })
-    .then((resObject)=>{
-        console.log(resObject.value);
-    })
-    .catch((err)=>{console.log(err);});
+// fetch("https://api.chucknorris.io/jokes/ux5mdkg3ssujpmgao3uzvg")
+//     .then((res)=>{
+//         if(res.ok)
+//             return res.json();
+//         else
+//             throw new Error(res.status);
+//     })
+//     .then((resObject)=>{
+//         console.log(resObject.value);
+//     })
+//     .catch((err)=>{console.log(err);});
 
 //POST
 // const user={
@@ -26,3 +26,6 @@ fetch("https://api.chucknorris.io/jokes/ux5mdkg3ssujpmgao3uzvg")
 //         throw new Error(res.status)
 // }).then((resObj)=>{console.log(resObj);})
 // .catch((err)=>{console.log(err);});
+
+//final drill
+
